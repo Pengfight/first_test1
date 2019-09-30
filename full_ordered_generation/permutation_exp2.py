@@ -145,12 +145,15 @@ def increase_method(arr, k):
             sub_num = temp_num // (i + 1)
             if (temp_arr[i] - temp_num % (i + 1)) < 0:
                 temp_arr[i] = temp_arr[i] + (i + 1) * 1 - (temp_num % (i + 1))
+                print(temp_arr)
                 for j in range(i + 1, len(temp_arr)):
                     if temp_arr[j] - 1 < 0:
                         temp_arr[j] = j + 1 - 1
                         temp_arr[j + 1] = temp_arr[j + 1] - 1
+                        print(temp_arr)
             else:
                 temp_arr[i] = temp_arr[i] - (temp_num % (i + 1))
+            print(temp_arr)
 
             '''temp_arr[i] = (temp_arr[i]) % (i + 1)
             sub_num = (temp_arr[i]) // (i + 1)'''
@@ -256,7 +259,7 @@ def decrease_method(arr, k):
 
 
 if __name__ == '__main__':
-    str1_in = input()
+    '''str1_in = input()
     n, type_method, k = [int(i) for i in str1_in.split()]
     str2_in = input()
     num = [int(i) for i in str2_in.split()]
@@ -267,7 +270,7 @@ if __name__ == '__main__':
     elif type_method == 3:
         decrease_method(num, k)
     else:
-        decrease_method(num, k)
+        decrease_method(num, k)'''
     '''my_arr = [8, 3, 9, 6, 4, 7, 5, 2, 1]
     my_arr1 = [3, 6, 4, 7, 5, 2, 1]
     # dictionary_sort(my_arr, 5)
@@ -292,8 +295,10 @@ if __name__ == '__main__':
     increase_method(my_arr5, 8)
     increase_method(my_arr5, 9)
     increase_method(my_arr5, 10)'''
-    # my_arr4 = [i for i in range(1, 21, 1)]
-    # dictionary_sort(my_arr4, math.factorial(20)-1)
+    # my_arr4 = [i for i in range(5, 0, -1)]
+    my_arr4 =[5, 4, 1, 2, 3]
+    print(my_arr4)
+    increase_method(my_arr4, -math.factorial(4)+1)
     '''for k in range(1, 21):
         my_arr4 = [i for i in range(k, 0, -1)]
         # increase_method(my_arr4, -10000)
