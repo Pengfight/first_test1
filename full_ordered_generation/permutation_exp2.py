@@ -23,7 +23,7 @@ def dictionary_sort(arr, k):
         # print(arr[i] - flag)
         temp_arr[i] = flag
     temp_arr.reverse()
-    print(temp_arr)
+    # print(temp_arr)
     # the addition of increase_method
     if k >= 0:
         add_num = k
@@ -36,8 +36,9 @@ def dictionary_sort(arr, k):
             if add_num == 0:
                 break
             temp_add = add_num
-            add_num = (temp_arr[i] + add_num) // (math.factorial(i))
-            temp_arr[i] = (temp_arr[i] + temp_add) % (math.factorial(i))
+            add_num = (temp_arr[i] + add_num) // (i+1)
+            temp_arr[i] = (temp_arr[i] + temp_add) % (i+1)
+            # print(add_num)
         # print(temp_arr)
         # reverse the arr
         # print(temp_arr)
@@ -47,7 +48,7 @@ def dictionary_sort(arr, k):
             return'''
     else:
         sub_num = -k
-        for i in range(len(temp_arr)):
+        for i in range(1, len(temp_arr)):
             '''if temp_arr[len(temp_arr) - 1] == 0 or operator.eq([i for i in range(len(arr))], temp_arr):
                 #print('1')
                 arr_traversing([i for i in range(len(arr), 0, -1)])
@@ -56,39 +57,38 @@ def dictionary_sort(arr, k):
             if sub_num == 0:
                 break
             temp_num = sub_num
-            sub_num = temp_num // (math.factorial(i))
-            if (temp_arr[i] - temp_num % (math.factorial(i))) < 0:
-                temp_arr[i] = temp_arr[i] + (math.factorial(i)) * 1 - (temp_num % (math.factorial(i)))
+            sub_num = temp_num // (i+1)
+            if (temp_arr[i] - temp_num % (i+1)) < 0:
+                temp_arr[i] = temp_arr[i] + (i+1) * 1 - (temp_num % (i+1))
                 for j in range(i + 1, len(temp_arr)):
                     if temp_arr[j] - 1 < 0:
-                        temp_arr[j] = math.factorial(j) + 1 - 1
+                        temp_arr[j] = j + 1 + 1 - 1
                         temp_arr[j + 1] = temp_arr[j + 1] - 1
             else:
-                temp_arr[i] = temp_arr[i] - (temp_num % math.factorial(i))
+                temp_arr[i] = temp_arr[i] - (temp_num % (i + 1))
 
             '''temp_arr[i] = (temp_arr[i]) % (i + 1)
             sub_num = (temp_arr[i]) // (i + 1)'''
-
     temp_arr.reverse()
     # print(temp_arr)
-
     # covert to original permutation
-    original_arr = list(range(len(arr)))
-    sub_arr = []
+    # original_arr = list(range(len(arr)))
+    is_in_arr = []
     # print(sub_arr)
-    for i in range(len(original_arr)):
-        permutation_num = len(original_arr) - i
-        flag_sub = temp_arr[i]
-        for sub in sub_arr:
-            if flag_sub >= sub:
-                flag_sub += 1
-            else:
-                break
-        sub_arr.append(flag_sub)
-        sub_arr.sort()
-        original_arr[flag_sub] = permutation_num
-    original_arr.reverse()
-    arr_traversing(original_arr)
+    for i in range(len(arr)):
+        permutation_num = temp_arr[i] + 1
+        # flag_sub = temp_arr[i]
+        for sub in range(len(is_in_arr)):
+            if permutation_num >= is_in_arr[sub]:
+                permutation_num += 1
+        is_in_arr.append(permutation_num)
+        is_in_arr.sort()
+        arr[i] = permutation_num
+
+    # temp_arr.reverse()
+    # print(arr)
+
+    arr_traversing(arr)
     # print(original_arr)
 
 
@@ -292,7 +292,8 @@ if __name__ == '__main__':
     increase_method(my_arr5, 8)
     increase_method(my_arr5, 9)
     increase_method(my_arr5, 10)'''
-    # my_arr4 = [i for i in range(1, 0, -1)]
+    # my_arr4 = [i for i in range(1, 21, 1)]
+    # dictionary_sort(my_arr4, math.factorial(20)-1)
     '''for k in range(1, 21):
         my_arr4 = [i for i in range(k, 0, -1)]
         # increase_method(my_arr4, -10000)
