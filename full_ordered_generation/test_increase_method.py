@@ -1,6 +1,5 @@
 from unittest import TestCase
+import numpy as np
 
-
-class TestIncrease_method(TestCase):
-    def test_increase_method(self):
-        self.fail()
+x = np.random.choice([1,2,3,4,5], 5, replace=False)
+print(x)

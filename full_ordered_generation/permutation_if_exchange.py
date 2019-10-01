@@ -1,6 +1,7 @@
 import operator
 import math
 
+
 def arr_traversing(arr):
     for i in arr:
         print(i, end=' ')
@@ -11,83 +12,92 @@ def dictionary_sort(arr, k):
     """
     eg: arr = [8,3,9,6,4,7,5,2,1]
     """
+    # covert to the number of mediators
+    temp_arr = list(range(len(arr)))
+    for i in range(len(arr)):
+        flag = 0
+        for j in range(i, len(arr), 1):
+            if arr[j] < arr[i]:
+                flag += 1
+        # print(arr[i])
+        # print(arr[i] - flag)
+        temp_arr[i] = flag
+    temp_arr.reverse()
+    # print(temp_arr)
+    # print(temp_arr)
+    # the addition of increase_method
     if k >= 0:
-        '''if k > math.factorial(len(arr) + 1):
-            arr.sort(reverse=1)
-            arr_traversing(arr)
-            return'''
-        # the number of permutations is k
-
-        for i in range(k):
-            temp = -1
-            # each permutation, from right to left, search the first one arr[i-1] < arr[i]
-            for pos in range(len(arr) - 1, 0, -1):
-                if arr[pos] > arr[pos - 1]:
-                    temp = arr[pos - 1]
-                    break
-            if temp == -1:
+        add_num = k
+        for i in range(1, len(temp_arr)):
+            '''if temp_arr[len(temp_arr) - 1] == 0 or operator.eq([i for i in range(len(arr))], temp_arr):
+                #print('1')
+                arr_traversing([i for i in range(len(arr), 0, -1)])
+                return'''
+            # decimal = decimal
+            if add_num == 0:
                 break
-            flag = arr[pos]
-            flag_i = pos
-            # search the min number that more than arr[pos-1], from left to right
-            for pos_inline in range(pos + 1, len(arr)):
-                if temp < arr[pos_inline] < flag:
-                    flag = arr[pos_inline]
-                    flag_i = pos_inline
-                else:
-                    break
-            # swich the number
-            arr[pos - 1] = flag
-            arr[flag_i] = temp
-            '''error
-            if flag_i == len(arr) - 1:
-                continue
-            '''
-            # sort the rest numbers
-            for number in (sorted([int(i) for i in arr[pos:len(arr)]])):
-                arr[pos] = number
-                pos += 1
-        # print(arr)
+            temp_add = add_num
+            add_num = (temp_arr[i] + add_num) // (i + 1)
+            temp_arr[i] = (temp_arr[i] + temp_add) % (i + 1)
+            # print(add_num)
+        # print(temp_arr)
+        # reverse the arr
+        # print(temp_arr)
+        '''if temp_arr[len(temp_arr) - 1] == 0:
+            # print('1')
+            arr_traversing([i for i in range(len(arr), 0, -1)])
+            return'''
+        # print(temp_arr)
     else:
-        '''if -k > math.factorial(len(arr) + 1):
-            arr.sort()
-            arr_traversing(arr)
-            return'''
-        # the number of permutations is k
-
-        for i in range(-k):
-            temp = -1
-            # each permutation, from right to left, search the first one arr[i-1] < arr[i]
-            for pos in range(len(arr) - 1, 0, -1):
-                if arr[pos] < arr[pos - 1]:
-                    temp = arr[pos - 1]
-                    break
-            if temp == -1:
+        sub_num = -k
+        for i in range(len(temp_arr)):
+            '''if temp_arr[len(temp_arr) - 1] == 0 or operator.eq([i for i in range(len(arr))], temp_arr):
+                #print('1')
+                arr_traversing([i for i in range(len(arr), 0, -1)])
+                return'''
+            # decimal = decimal
+            if sub_num == 0:
                 break
-            flag = arr[pos]
-            flag_i = pos
-            # search the min number that more than arr[pos-1], from left to right
-            for pos_inline in range(pos + 1, len(arr)):
-                if temp > arr[pos_inline] > flag:
-                    flag = arr[pos_inline]
-                    flag_i = pos_inline
-                else:
-                    break
-            # swich the number
-            arr[pos - 1] = flag
-            arr[flag_i] = temp
-            '''error
-            if flag_i == len(arr) - 1:
-                continue
-            '''
-            # sort the rest numbers
-            for number in (sorted([int(i) for i in arr[pos:]], reverse=1)):
-                # print(number)
-                arr[pos] = number
-                pos += 1
-        # print('{}'.format((for i in arr)))
-        # print(arr)
+            temp_num = sub_num
+            sub_num = temp_num // (i + 1)
+            if (temp_arr[i] - (temp_num % (i + 1))) < 0:
+                temp_arr[i] = temp_arr[i] + (i + 1) - (temp_num % (i + 1))
+                temp_arr[i + 1] = temp_arr[i + 1] - 1
+                if (i + 1) < len(temp_arr):
+                    for j in range(i + 1, len(temp_arr)):
+                        if temp_arr[j] < 0:
+                            temp_arr[j] = (j + 1) + temp_arr[j]
+                            if (j + 1) < len(temp_arr):
+                                temp_arr[j + 1] = temp_arr[j + 1] - 1
+            else:
+                temp_arr[i] = temp_arr[i] - (temp_num % (i + 1))
+
+            '''temp_arr[i] = (temp_arr[i]) % (i + 1)
+            sub_num = (temp_arr[i]) // (i + 1)'''
+        # print(temp_arr)
+    temp_arr.reverse()
+    # print(temp_arr)
+    # covert to original permutation
+    # original_arr = list(range(len(arr)))
+    is_in_arr = []
+    # print(sub_arr)
+    for i in range(len(arr)):
+        permutation_num = temp_arr[i] + 1
+        # flag_sub = temp_arr[i]
+        for sub in range(len(is_in_arr)):
+            if permutation_num >= is_in_arr[sub]:
+                permutation_num += 1
+                # print(permutation_num, end=' ')
+        is_in_arr.append(permutation_num)
+        is_in_arr.sort()
+        # print(is_in_arr)
+        arr[i] = permutation_num
+
+    # temp_arr.reverse()
+    # print(arr)
+
     arr_traversing(arr)
+    # print(original_arr)
 
 
 def increase_method(arr, k):
@@ -141,12 +151,13 @@ def increase_method(arr, k):
                 break
             temp_num = sub_num
             sub_num = temp_num // (i + 1)
-            if (temp_arr[i] - temp_num % (i + 1)) < 0:
-                temp_arr[i] = temp_arr[i] + (i + 1) * 1 - (temp_num % (i + 1))
+            if (temp_arr[i] - (temp_num % (i + 1))) < 0:
+                temp_arr[i] = temp_arr[i] + (i + 1) - (temp_num % (i + 1))
+                temp_arr[i + 1] = temp_arr[i + 1] - 1
                 if (i + 1) < len(temp_arr):
                     for j in range(i + 1, len(temp_arr)):
-                        if temp_arr[j] - 1 < 0:
-                            temp_arr[j] = j + 1 - 1
+                        if temp_arr[j] < 0:
+                            temp_arr[j] = temp_arr[j] + (j + 1)
                             if (j + 1) < len(temp_arr):
                                 temp_arr[j + 1] = temp_arr[j + 1] - 1
             else:
@@ -154,7 +165,7 @@ def increase_method(arr, k):
 
             '''temp_arr[i] = (temp_arr[i]) % (i + 1)
             sub_num = (temp_arr[i]) // (i + 1)'''
-            # print(temp_arr)
+        # print(temp_arr)
 
     temp_arr.reverse()
     # print(temp_arr)
@@ -217,6 +228,23 @@ def decrease_method(arr, k):
         # temp_arr.reverse()
         # print(temp_arr)
     else:
+        '''sub_num = -k
+        for i in range(len(temp_arr)):
+            # decimal = decimal
+            if sub_num == 0:
+                break
+            temp_num = sub_num
+            sub_num = temp_num // (len(temp_arr) - i)
+            if (temp_arr[i] - (temp_num % (len(temp_arr) - i))) < 0:
+                temp_arr[i] = temp_arr[i] + (len(temp_arr) - i) * 1 - (temp_num % (len(temp_arr) - i))
+                if (i + 1) < len(temp_arr):
+                    for j in range(i + 1, len(temp_arr)):
+                        if temp_arr[j] - 1 < 0:
+                            temp_arr[j] = j + 1 - 1
+                            if (j + 1) < len(temp_arr):
+                                temp_arr[j + 1] = temp_arr[j + 1] - 1
+            else:
+                temp_arr[i] = temp_arr[i] - (temp_num % (len(temp_arr) - i))'''
         sub_num = -k
         for i in range(len(temp_arr)):
             '''if temp_arr[len(temp_arr) - 1] == 0 or operator.eq([i for i in range(len(arr))], temp_arr):
@@ -230,10 +258,11 @@ def decrease_method(arr, k):
             sub_num = temp_num // (len(temp_arr) - i)
             if (temp_arr[i] - temp_num % (len(temp_arr) - i)) < 0:
                 temp_arr[i] = temp_arr[i] + (len(temp_arr) - i) * 1 - (temp_num % (len(temp_arr) - i))
+                temp_arr[i+1] = temp_arr[i + 1] - 1
                 if (i + 1) < len(temp_arr):
                     for j in range(i + 1, len(temp_arr)):
-                        if temp_arr[j] - 1 < 0:
-                            temp_arr[j] = j + 1 - 1
+                        if temp_arr[j] < 0:
+                            temp_arr[j] = temp_arr[j] + j + 1
                             if (j + 1) < len(temp_arr):
                                 temp_arr[j + 1] = temp_arr[j + 1] - 1
             else:
@@ -252,6 +281,7 @@ def decrease_method(arr, k):
                 flag_sub += 1
         sub_arr.append(flag_sub)
         sub_arr.sort()
+        # print(original_arr)
         original_arr[flag_sub] = permutation_num
     original_arr.reverse()
     arr_traversing(original_arr)
@@ -259,7 +289,7 @@ def decrease_method(arr, k):
 
 
 if __name__ == '__main__':
-    '''str1_in = input()
+    str1_in = input()
     n, type_method, k = [int(i) for i in str1_in.split()]
     str2_in = input()
     num = [int(i) for i in str2_in.split()]
@@ -270,7 +300,7 @@ if __name__ == '__main__':
     elif type_method == 3:
         decrease_method(num, k)
     else:
-        decrease_method(num, k)'''
+        decrease_method(num, k)
     '''my_arr = [8, 3, 9, 6, 4, 7, 5, 2, 1]
     my_arr1 = [3, 6, 4, 7, 5, 2, 1]
     # dictionary_sort(my_arr, 5)
@@ -300,13 +330,18 @@ if __name__ == '__main__':
         my_arr4 = [i for i in range(k, 0, -1)]
         # increase_method(my_arr4, -10000)
         increase_method(my_arr4, -math.factorial(k) + 1)'''
-    x1 = [7,  8,  4, 14, 12,  2, 17,  5, 10, 16, 13,  6, 11, 15,  1,  9,  3, 18]
+    # x1 = [7,  8,  4, 14, 12,  2, 17,  5, 10, 16, 13,  6, 11, 15,  1,  9,  3, 18]
     # x1 = [i for i in range(20, 0, -1)]
-    decrease_method(x1, -2)
-    '''for i in range(2, 20):
-        x = np.random.choice([j for j in range(1, i)], i-1, replace=False)
-        print(x)
-        increase_method(x, -2)'''
+    # increase_method(x1, -2)
+    # decrease_method(x1, -2)
+    # dictionary_sort(x1, -2)
+    # decrease_method(x1, -math.factorial(20) + 1)
+    '''for num in range(5000):
+        for i in range(10, 22):
+            x = np.random.choice([j for j in range(1, i)], i-1, replace=False)
+            print(x)
+            increase_method(x, -math.factorial(8))
+        print(num)'''
 
     # my_arr4 = [i for i in range(, 0, -1)]
     '''my_arr4 = [i for i in range(20, 0, -1)]

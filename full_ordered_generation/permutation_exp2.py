@@ -296,9 +296,9 @@ if __name__ == '__main__':
     increase_method(my_arr5, 9)
     increase_method(my_arr5, 10)'''
     # my_arr4 = [i for i in range(5, 0, -1)]
-    my_arr4 =[5, 4, 1, 2, 3]
-    print(my_arr4)
-    increase_method(my_arr4, -math.factorial(4)+1)
+    # my_arr4 =[5, 4, 1, 2, 3]
+    # print(my_arr4)
+    # increase_method(my_arr4, -math.factorial(4)+1)
     '''for k in range(1, 21):
         my_arr4 = [i for i in range(k, 0, -1)]
         # increase_method(my_arr4, -10000)
