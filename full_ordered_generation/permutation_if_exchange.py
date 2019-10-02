@@ -256,13 +256,14 @@ def decrease_method(arr, k):
                 break
             temp_num = sub_num
             sub_num = temp_num // (len(temp_arr) - i)
-            if (temp_arr[i] - temp_num % (len(temp_arr) - i)) < 0:
+            if (temp_arr[i] - (temp_num % (len(temp_arr) - i))) < 0:
                 temp_arr[i] = temp_arr[i] + (len(temp_arr) - i) * 1 - (temp_num % (len(temp_arr) - i))
-                temp_arr[i+1] = temp_arr[i + 1] - 1
+                temp_arr[i + 1] = temp_arr[i + 1] - 1
                 if (i + 1) < len(temp_arr):
                     for j in range(i + 1, len(temp_arr)):
                         if temp_arr[j] < 0:
-                            temp_arr[j] = temp_arr[j] + j + 1
+                            # temp_arr[j] = temp_arr[j] + j + 1
+                            temp_arr[j] = temp_arr[j] + (len(temp_arr) - j)
                             if (j + 1) < len(temp_arr):
                                 temp_arr[j + 1] = temp_arr[j + 1] - 1
             else:
@@ -288,8 +289,79 @@ def decrease_method(arr, k):
     # print(original_arr)
 
 
+def adjacent_exchange_method(arr, k):
+    # convert to the number of mediators
+    # start at 2
+    mediator_list = [0]
+    # print(mediator_list)
+    arrow_list = []
+    sub = 1
+    for i in range(2, len(arr)+1, 1):
+        pos = arr.index(i)
+        mediator_num = 0
+        # i is odd? even number? to get direction of i
+        if (i % 2) != 0:
+            direction = mediator_list[sub-1] % 2
+        else:
+            direction = (mediator_list[sub-1] + mediator_list[sub-2]) % 2
+        # get direction then calculating mediator_num
+        if direction == 0 or i == 2:
+            # from pos to right
+            for j in range(pos + 1, len(arr)):
+                if arr[j] < i:
+                    mediator_num += 1
+            mediator_list.append(mediator_num)
+        else:
+            # from pos to left
+            for j in range(0, pos):
+                if arr[j] < i:
+                    mediator_num += 1
+            mediator_list.append(mediator_num)
+        sub += 1
+    print(mediator_list)
+    mediator_list.reverse()
+
+    # the addition of mediator
+    if k >= 0:
+        add_num = k
+        for i in range(len(mediator_list)):
+            if add_num == 0:
+                break
+            temp_add = add_num
+            add_num = (mediator_list[i] + add_num) // (len(mediator_list) - i)
+            mediator_list[i] = (mediator_list[i] + temp_add) % (len(mediator_list) - i)
+        # print(mediator_list)
+        # reverse the arr
+        # mediator_list.reverse()
+        # print(mediator_list)
+    # the subtraction of mediator
+    else:
+        sub_num = -k
+        for i in range(len(mediator_list)):
+            # decimal = decimal
+            if sub_num == 0:
+                break
+            temp_num = sub_num
+            sub_num = temp_num // (len(mediator_list) - i)
+            if (mediator_list[i] - (temp_num % (len(mediator_list) - i))) < 0:
+                mediator_list[i] = mediator_list[i] + (len(mediator_list) - i) * 1 - (temp_num % (len(mediator_list) - i))
+                mediator_list[i + 1] = mediator_list[i + 1] - 1
+                if (i + 1) < len(mediator_list):
+                    for j in range(i + 1, len(mediator_list)):
+                        if mediator_list[j] < 0:
+                            # mediator_list[j] = mediator_list[j] + j + 1
+                            mediator_list[j] = mediator_list[j] + (len(mediator_list) - j)
+                            if (j + 1) < len(mediator_list):
+                                mediator_list[j + 1] = mediator_list[j + 1] - 1
+            else:
+                mediator_list[i] = mediator_list[i] - (temp_num % (len(mediator_list) - i))
+
+        # print(mediator_list)
+
+
+
 if __name__ == '__main__':
-    str1_in = input()
+    '''str1_in = input()
     n, type_method, k = [int(i) for i in str1_in.split()]
     str2_in = input()
     num = [int(i) for i in str2_in.split()]
@@ -300,7 +372,7 @@ if __name__ == '__main__':
     elif type_method == 3:
         decrease_method(num, k)
     else:
-        decrease_method(num, k)
+        decrease_method(num, k)'''
     '''my_arr = [8, 3, 9, 6, 4, 7, 5, 2, 1]
     my_arr1 = [3, 6, 4, 7, 5, 2, 1]
     # dictionary_sort(my_arr, 5)
@@ -331,11 +403,13 @@ if __name__ == '__main__':
         # increase_method(my_arr4, -10000)
         increase_method(my_arr4, -math.factorial(k) + 1)'''
     # x1 = [7,  8,  4, 14, 12,  2, 17,  5, 10, 16, 13,  6, 11, 15,  1,  9,  3, 18]
-    # x1 = [i for i in range(20, 0, -1)]
+    x1 = [i for i in range(19, 0, -1)]
+    my_arr = [8, 3, 9, 6, 4, 7, 5, 2, 1]
     # increase_method(x1, -2)
     # decrease_method(x1, -2)
     # dictionary_sort(x1, -2)
-    # decrease_method(x1, -math.factorial(20) + 1)
+    # decrease_method(x1, -math.factorial(19) + 2)
+    adjacent_exchange_method(my_arr, -2)
     '''for num in range(5000):
         for i in range(10, 22):
             x = np.random.choice([j for j in range(1, i)], i-1, replace=False)
