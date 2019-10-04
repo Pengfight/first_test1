@@ -112,9 +112,6 @@ def increase_method(arr, k):
         # print(arr[i] - flag)
         temp_arr[arr[i] - 1] = flag
     # print(temp_arr)
-    '''if operator.eq([i for i in range(len(arr))], temp_arr):
-        arr_traversing(arr)
-        return'''
     # the addition of increase_method
     # print(sorted(temp_arr))
     # temp_arr = [8, 7, 6, 5, 4, 3, 2, 0, 0]
@@ -122,10 +119,6 @@ def increase_method(arr, k):
     if k >= 0:
         add_num = k
         for i in range(len(temp_arr)):
-            '''if temp_arr[len(temp_arr) - 1] == 0 or operator.eq([i for i in range(len(arr))], temp_arr):
-                #print('1')
-                arr_traversing([i for i in range(len(arr), 0, -1)])
-                return'''
             # decimal = decimal
             if add_num == 0:
                 break
@@ -135,17 +128,9 @@ def increase_method(arr, k):
         # print(temp_arr)
         # reverse the arr
         # print(temp_arr)
-        '''if temp_arr[len(temp_arr) - 1] == 0:
-            # print('1')
-            arr_traversing([i for i in range(len(arr), 0, -1)])
-            return'''
     else:
         sub_num = -k
         for i in range(len(temp_arr)):
-            '''if temp_arr[len(temp_arr) - 1] == 0 or operator.eq([i for i in range(len(arr))], temp_arr):
-                #print('1')
-                arr_traversing([i for i in range(len(arr), 0, -1)])
-                return'''
             # decimal = decimal
             if sub_num == 0:
                 break
@@ -162,9 +147,6 @@ def increase_method(arr, k):
                                 temp_arr[j + 1] = temp_arr[j + 1] - 1
             else:
                 temp_arr[i] = temp_arr[i] - (temp_num % (i + 1))
-
-            '''temp_arr[i] = (temp_arr[i]) % (i + 1)
-            sub_num = (temp_arr[i]) // (i + 1)'''
         # print(temp_arr)
 
     temp_arr.reverse()
@@ -213,6 +195,7 @@ def decrease_method(arr, k):
     # print(temp_arr)
     # reverse the arr to decrease_method
     temp_arr.reverse()
+    # print(temp_arr)
 
     # the addition of increase_method
     if k >= 0:
@@ -228,29 +211,8 @@ def decrease_method(arr, k):
         # temp_arr.reverse()
         # print(temp_arr)
     else:
-        '''sub_num = -k
-        for i in range(len(temp_arr)):
-            # decimal = decimal
-            if sub_num == 0:
-                break
-            temp_num = sub_num
-            sub_num = temp_num // (len(temp_arr) - i)
-            if (temp_arr[i] - (temp_num % (len(temp_arr) - i))) < 0:
-                temp_arr[i] = temp_arr[i] + (len(temp_arr) - i) * 1 - (temp_num % (len(temp_arr) - i))
-                if (i + 1) < len(temp_arr):
-                    for j in range(i + 1, len(temp_arr)):
-                        if temp_arr[j] - 1 < 0:
-                            temp_arr[j] = j + 1 - 1
-                            if (j + 1) < len(temp_arr):
-                                temp_arr[j + 1] = temp_arr[j + 1] - 1
-            else:
-                temp_arr[i] = temp_arr[i] - (temp_num % (len(temp_arr) - i))'''
         sub_num = -k
         for i in range(len(temp_arr)):
-            '''if temp_arr[len(temp_arr) - 1] == 0 or operator.eq([i for i in range(len(arr))], temp_arr):
-                #print('1')
-                arr_traversing([i for i in range(len(arr), 0, -1)])
-                return'''
             # decimal = decimal
             if sub_num == 0:
                 break
@@ -269,7 +231,7 @@ def decrease_method(arr, k):
             else:
                 temp_arr[i] = temp_arr[i] - (temp_num % (len(temp_arr) - i))
 
-        # print(temp_arr)
+    # print(temp_arr)
 
     # covert to original permutation
     original_arr = list(range(len(arr)))
@@ -296,14 +258,14 @@ def adjacent_exchange_method(arr, k):
     # print(mediator_list)
     arrow_list = []
     sub = 1
-    for i in range(2, len(arr)+1, 1):
+    for i in range(2, len(arr) + 1, 1):
         pos = arr.index(i)
         mediator_num = 0
         # i is odd? even number? to get direction of i
         if (i % 2) != 0:
-            direction = mediator_list[sub-1] % 2
+            direction = mediator_list[sub - 1] % 2
         else:
-            direction = (mediator_list[sub-1] + mediator_list[sub-2]) % 2
+            direction = (mediator_list[sub - 1] + mediator_list[sub - 2]) % 2
         # get direction then calculating mediator_num
         if direction == 0 or i == 2:
             # from pos to right
@@ -311,15 +273,16 @@ def adjacent_exchange_method(arr, k):
                 if arr[j] < i:
                     mediator_num += 1
             mediator_list.append(mediator_num)
-        else:
+        if direction != 0:
             # from pos to left
             for j in range(0, pos):
                 if arr[j] < i:
                     mediator_num += 1
             mediator_list.append(mediator_num)
         sub += 1
-    print(mediator_list)
+
     mediator_list.reverse()
+    # print(mediator_list)
 
     # the addition of mediator
     if k >= 0:
@@ -344,7 +307,8 @@ def adjacent_exchange_method(arr, k):
             temp_num = sub_num
             sub_num = temp_num // (len(mediator_list) - i)
             if (mediator_list[i] - (temp_num % (len(mediator_list) - i))) < 0:
-                mediator_list[i] = mediator_list[i] + (len(mediator_list) - i) * 1 - (temp_num % (len(mediator_list) - i))
+                mediator_list[i] = mediator_list[i] + (len(mediator_list) - i) * 1 - (
+                        temp_num % (len(mediator_list) - i))
                 mediator_list[i + 1] = mediator_list[i + 1] - 1
                 if (i + 1) < len(mediator_list):
                     for j in range(i + 1, len(mediator_list)):
@@ -355,13 +319,110 @@ def adjacent_exchange_method(arr, k):
                                 mediator_list[j + 1] = mediator_list[j + 1] - 1
             else:
                 mediator_list[i] = mediator_list[i] - (temp_num % (len(mediator_list) - i))
+    # print(mediator_list)
+    mediator_list.reverse()
 
-        # print(mediator_list)
 
+    # convert to original permutation
+    # mediator_list = [0]
+    # print(mediator_list)
+    # arrow_list = []
+    # original_permutation = list(range(len(mediator_list)))
+    '''original_permutation = [0 for i in range(len(mediator_list))]
+    # print(original_permutation)
+    sub = len(mediator_list)
+    # sub = 2
+    sub_list = []
+    for i in range(len(mediator_list) - 1, 0, -1):
+        ## mediator_num = 0
+        # sub is odd? even number? to get direction of sub
+        if (sub % 2) != 0 and i-1 >= 0:
+            direction = mediator_list[i - 1] % 2
+        if (sub % 2) == 0 and i-2 >= 0:
+            direction = (mediator_list[i - 1] + mediator_list[i - 2]) % 2
+        # get direction then calculating mediator_num
+        if direction == 0 or i == 1:
+            # from pos to left
+            flag_sub = len(mediator_list) - mediator_list[i] - 1
+            for flag in sub_list:
+                if flag_sub <= flag:
+                    flag_sub -= 1
+            original_permutation[flag_sub] = sub
+            sub_list.append(flag_sub)
+            sub_list.sort()
+            # print(direction, sub, mediator_list[i], flag_sub, end=' ')
+            print(original_permutation)
+            sub -= 1
+            # sub += 1
+
+        #if direction != 0:
+        if direction != 0:
+            # from pos to right
+            flag_sub = mediator_list[i]
+            for flag in sub_list:
+                if flag_sub >= flag:
+                    flag_sub += 1
+            original_permutation[flag_sub] = sub
+            sub_list.append(flag_sub)
+            sub_list.sort()
+            # print(direction, sub, mediator_list[i], flag_sub, end=' ')
+            print(original_permutation)
+            sub -= 1
+            # sub += 1
+    original_permutation[original_permutation.index(0)] = 1'''
+    # convert to original permutation
+    # mediator_list = [0]
+    # print(mediator_list)
+    # arrow_list = []
+    # original_permutation = list(range(len(mediator_list)))
+    original_permutation = [0 for i in range(len(mediator_list))]
+    # print(original_permutation)
+    sub = len(mediator_list)
+    sub_list = []
+    for i in range(len(mediator_list) - 1, 0, -1):
+        ## mediator_num = 0
+        # i is odd? even number? to get direction of i
+        if (sub % 2) != 0 and i - 1 >= 0:
+            direction = mediator_list[i - 1] % 2
+        if (sub % 2) == 0 and i - 2 >= 0:
+            direction = (mediator_list[i - 1] + mediator_list[i - 2]) % 2
+        # get direction then calculating mediator_num
+        if direction == 0 or i == 1:
+            # from pos to left
+            flag_sub = len(mediator_list) - mediator_list[i] - 1
+            for flag in range(len(sub_list)-1, -1, -1):
+                if flag_sub <= sub_list[flag]:
+                    flag_sub -= 1
+            original_permutation[flag_sub] = sub
+            sub_list.append(flag_sub)
+            sub_list.sort()
+            # print(direction, sub, mediator_list[i], flag_sub, end=' ')
+            # print(original_permutation)
+            sub -= 1
+
+        # if direction != 0:
+        else:
+            # from pos to right
+            flag_sub = mediator_list[i]
+            for flag in sub_list:
+                if flag_sub >= flag:
+                    flag_sub += 1
+            original_permutation[flag_sub] = sub
+            sub_list.append(flag_sub)
+            sub_list.sort()
+            # print(direction, sub, mediator_list[i], flag_sub, end=' ')
+            # print(original_permutation)
+            sub -= 1
+    original_permutation[original_permutation.index(0)] = 1
+    # print(original_permutation)
+    arr_traversing(original_permutation)
+
+
+    # mediator_list.reverse()
 
 
 if __name__ == '__main__':
-    '''str1_in = input()
+    str1_in = input()
     n, type_method, k = [int(i) for i in str1_in.split()]
     str2_in = input()
     num = [int(i) for i in str2_in.split()]
@@ -372,7 +433,7 @@ if __name__ == '__main__':
     elif type_method == 3:
         decrease_method(num, k)
     else:
-        decrease_method(num, k)'''
+        adjacent_exchange_method(num, k)
     '''my_arr = [8, 3, 9, 6, 4, 7, 5, 2, 1]
     my_arr1 = [3, 6, 4, 7, 5, 2, 1]
     # dictionary_sort(my_arr, 5)
@@ -403,13 +464,18 @@ if __name__ == '__main__':
         # increase_method(my_arr4, -10000)
         increase_method(my_arr4, -math.factorial(k) + 1)'''
     # x1 = [7,  8,  4, 14, 12,  2, 17,  5, 10, 16, 13,  6, 11, 15,  1,  9,  3, 18]
-    x1 = [i for i in range(19, 0, -1)]
-    my_arr = [8, 3, 9, 6, 4, 7, 5, 2, 1]
+    # x1 = [i for i in range(5, 0, -1)]
+    # my_arr = [8, 3, 9, 6, 4, 7, 5, 2, 1]
+    # adj_arr = [5,3,4,1,2]
     # increase_method(x1, -2)
     # decrease_method(x1, -2)
     # dictionary_sort(x1, -2)
-    # decrease_method(x1, -math.factorial(19) + 2)
-    adjacent_exchange_method(my_arr, -2)
+    # decrease_method(my_arr, 1)
+    # adjacent_exchange_method(my_arr, 1)
+    # decrease_method(x1, -math.factorial(6) + 1)
+    # adjacent_exchange_method(adj_arr, -1)
+    '''for i in range(math.factorial(5)):
+        adjacent_exchange_method(x1, -i)'''
     '''for num in range(5000):
         for i in range(10, 22):
             x = np.random.choice([j for j in range(1, i)], i-1, replace=False)
